@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestingApplication.Models;
 
 namespace TestingApplication
 {
@@ -28,6 +29,7 @@ namespace TestingApplication
 
         private void textBoxButton_Click(object sender, RoutedEventArgs e)
         {
+            UIProperties up = new UIProperties();
             TextWindow tw = new TextWindow();
             tw.Owner = this;
             tw.Show();

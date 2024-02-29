@@ -7,6 +7,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using System.Text;
+using Window = FlaUI.Core.AutomationElements.Window;
+using Application = FlaUI.Core.Application;
+using Mouse = FlaUI.Core.Input.Mouse;
+using Keyboard = FlaUI.Core.Input.Keyboard;
 
 namespace Win11ThemeTest
 {
