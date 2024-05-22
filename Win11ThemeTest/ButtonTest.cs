@@ -4,6 +4,7 @@ using FlaUI.Core.Input;
 using FlaUI.UIA3;
 using NUnit.Framework.Internal;
 using System.Configuration;
+using System.Drawing;
 
 namespace Win11ThemeTest
 {
@@ -148,9 +149,138 @@ namespace Win11ThemeTest
             Assert.That(popup, Is.Null);
         }
 
+        #region UIApperancetestcases
+        //test if button is available in window
+        [Test]
+        public void Button1_basicButtonHasWin11Theme()
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(btnWindow, Is.Not.Null);
+                Assert.That(button, Is.Not.Null);
+            });
+            string expectedPath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Expected\\Button\\basicButton_screenshot.png";      
+            string filePath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Result\\Button\\" + "basicButton_screenshot.png";
+            CaptureElementScreenshot(filePath);
+            CompareImages(filePath, expectedPath);
+        }
+
+        [Test]
+        public void Button1_buttonMouseHoverWin11Theme()
+        {           
+            Assert.Multiple(() =>
+            {
+                Assert.That(btnWindow, Is.Not.Null);
+
+                Assert.That(button, Is.Not.Null);
+            });
+            Mouse.MoveTo(button.GetClickablePoint());
+             string expectedPath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Expected\\Button\\mouseHoverButton_screenshot.png";
+            string filePath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Result\\Button\\" + "mouseHoverButton_screenshot.png";
+            CaptureElementScreenshot(filePath);
+            CompareImages(filePath, expectedPath);
+        }
+
+        private void CaptureElementScreenshot(string filePath)
+        {           
+            var buttons = button;
+            Wait.UntilInputIsProcessed();
+            
+            if (buttons != null)
+            {
+                // Get the bounding rectangle of the button
+                var rect = buttons.BoundingRectangle;
+
+                // Capture the screenshot of the button
+                using (var bmp = new System.Drawing.Bitmap((int)rect.Width, (int)rect.Height))
+                {
+                    using (var g = System.Drawing.Graphics.FromImage(bmp))
+                    {
+                        g.CopyFromScreen(new System.Drawing.Point((int)rect.Left, (int)rect.Top), System.Drawing.Point.Empty, new System.Drawing.Size((int)rect.Width, (int)rect.Height));
+                    }
+
+                    // Optionally, save or process the captured screenshot                    
+                    bmp.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
+                    Console.WriteLine($"Screenshot captured and saved to: {Path.GetFullPath(filePath)}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Button not found.");
+            }           
+        }
+
+        
+        private void CompareImages(string resultPath, string expectedPath)
+        {            
+            // Load the PNG image files         
+            using (var image1 = new Bitmap(expectedPath))
+            using (var image2 = new Bitmap(resultPath))
+            {
+                // Compare the pixel values of the images
+                bool areEqual = AreImagesEqual(image1, image2);
+
+                // Determine if the images are identical
+                if (areEqual)
+                {
+                    Assert.Pass();
+                }
+                else
+                {
+                    Assert.Fail();
+                }
+            }
+            //DeleteFileButton_Click();
+        }
+
+        private bool AreImagesEqual(Bitmap image1, Bitmap image2)
+        {
+            // Check if images have the same dimensions
+            if (image1.Width != image2.Width || image1.Height != image2.Height)
+            {
+                return false;
+            }
+
+            // Compare pixel values of the images
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    if (image1.GetPixel(x, y) != image2.GetPixel(x, y))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private void DeleteFileButton_Click()
+        {
+            string filePath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Result\\button_screenshot.png"; // Replace with the path of the file you want to delete
+
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);                   
+                }
+                else
+                {
+                    Console.WriteLine();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");                
+            }
+        }
+
+        #endregion
         //close windows
         [Test]
-        public void Button8_closeWindows()
+        public void Button91_closeWindows()
         {
             Assert.That(btnWindow, Is.Not.Null);
             btnWindow.Close();

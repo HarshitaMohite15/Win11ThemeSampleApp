@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingApplication"
         mc:Ignorable="d"
-        Title="TextWindow" Height="450" Width="800">
+        Title="TextWindow" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Grid>
         <TextBox Name="tbTxt" Text="TextBoxValue" Margin="11,14,365,336" />
         <TextBox Name="tbTxt_disabled" Text="TextBox Disabled" Margin="11,116,368,246" IsEnabled="False" />

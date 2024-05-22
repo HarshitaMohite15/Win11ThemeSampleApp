@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingApplication"
         mc:Ignorable="d"
-        Title="ButtonWindow" Height="450" Width="800">
+        Title="ButtonWindow" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Grid>
        
             <Button x:Name="btn" Content="Click Me" RenderTransformOrigin="4.035,-1.289" Click="btn_Click" HorizontalAlignment="Center" Margin="0,112,0,0" VerticalAlignment="Top" />
