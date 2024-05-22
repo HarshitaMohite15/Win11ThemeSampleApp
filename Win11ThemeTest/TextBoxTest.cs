@@ -20,7 +20,7 @@ namespace Win11ThemeTest
         TextBox? multiLineTextBox;
         Button? txtButton;
         UIA3Automation automation = new UIA3Automation();
-        
+    
         public textBoxTests()
         {
             try
@@ -70,50 +70,66 @@ namespace Win11ThemeTest
         [Test]
         public void text_ui1SimpleTextBox()
         {
+            var expectedPath = ConfigurationManager.AppSettings["expectedPath"];
+            var resultPath = ConfigurationManager.AppSettings["resultPath"];
+            string fileName = "basicTextBox_screenshot.png";
+            string area = "TextBox\\";
             Assert.Multiple(() =>
             {
                 Assert.That(textWindow, Is.Not.Null);
                 Assert.That(textBox, Is.Not.Null);
             });
-            string expectedPath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Expected\\TextBox\\basicTextBox_screenshot.png";
-            string filePath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Result\\TextBox\\" + "basicTextBox_screenshot.png";
-            CaptureElementScreenshot(filePath);
-            CompareImages(filePath, expectedPath);
+            expectedPath = expectedPath + area + fileName;
+            resultPath = resultPath + area + fileName;
+            CaptureElementScreenshot(resultPath);
+            CompareImages(resultPath, expectedPath);
         }
 
         [Test]
         public void text_ui2MouseHoverTextBox()
         {
+            var expectedPath = ConfigurationManager.AppSettings["expectedPath"];
+            var resultPath = ConfigurationManager.AppSettings["resultPath"];
+            string fileName = "mouseHoverTextBox_screenshot.png";
+            string area = "TextBox\\";
             Assert.Multiple(() =>
             {
                 Assert.That(textWindow, Is.Not.Null);
                 Assert.That(textBox, Is.Not.Null);
             });
             Mouse.MoveTo(textBox.GetClickablePoint());
-            string expectedPath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Expected\\TextBox\\mouseHoverTextBox_screenshot.png";
-            string filePath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Result\\TextBox\\" + "mouseHoverTextBox_screenshot.png";
-            CaptureElementScreenshot(filePath);
-            CompareImages(filePath, expectedPath);
+            expectedPath = expectedPath + area + fileName;
+            resultPath = resultPath + area + fileName;           
+            CaptureElementScreenshot(resultPath);
+            CompareImages(resultPath, expectedPath);
         }
 
         [Test]
         public void text_ui3ClickTextBox()
         {
+            var expectedPath = ConfigurationManager.AppSettings["expectedPath"];
+            var resultPath = ConfigurationManager.AppSettings["resultPath"];
+            string fileName = "clickTextBox_screenshot.png";
+            string area = "TextBox\\";
             Assert.Multiple(() =>
             {
                 Assert.That(textWindow, Is.Not.Null);
                 Assert.That(textBox, Is.Not.Null);
             });
             Mouse.Click(textBox.GetClickablePoint());
-            string expectedPath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Expected\\TextBox\\clickTextBox_screenshot.png";
-            string filePath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Result\\TextBox\\" + "clickTextBox_screenshot.png";
-            CaptureElementScreenshot(filePath);
-            CompareImages(filePath, expectedPath);
+            expectedPath = expectedPath + area + fileName;
+            resultPath = resultPath + area + fileName; 
+            CaptureElementScreenshot(resultPath);
+            CompareImages(resultPath, expectedPath);
         }
 
         [Test]
         public void text_ui4clearTextTextBox()
         {
+            var expectedPath = ConfigurationManager.AppSettings["expectedPath"];
+            var resultPath = ConfigurationManager.AppSettings["resultPath"];
+            string fileName = "clearTextBox_screenshot.png";
+            string area = "TextBox\\";
             Assert.Multiple(() =>
             {
                 Assert.That(textWindow, Is.Not.Null);
@@ -122,11 +138,10 @@ namespace Win11ThemeTest
             Mouse.Click(textBox.GetClickablePoint());
             Keyboard.TypeSimultaneously(VirtualKeyShort.CONTROL, VirtualKeyShort.KEY_A); // Select all text
             Keyboard.Type(VirtualKeyShort.DELETE);
-
-            string expectedPath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Expected\\TextBox\\clearTextBox_screenshot.png";
-            string filePath = "D:\\Win11ThemeCode\\menuTest\\Win11ThemeSampleApp\\Win11ThemeTest\\Result\\TextBox\\" + "clearTextBox_screenshot.png";
-            CaptureElementScreenshot(filePath);
-            CompareImages(filePath, expectedPath);
+            expectedPath = expectedPath + area + fileName;
+            resultPath = resultPath + area + fileName;
+            CaptureElementScreenshot(resultPath);
+            CompareImages(resultPath, expectedPath);
         }
 
         [Test]
